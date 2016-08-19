@@ -1,0 +1,21 @@
+(dp1
+S'output'
+p2
+S"<type 'exceptions.AttributeError'> 'DAL' object has no attribute 'order'"
+p3
+sS'layer'
+p4
+S'/home/vedant/Desktop/web2py/applications/garden_2_may/controllers/restaurant.py'
+p5
+sS'code'
+p6
+S"# -*- coding: utf-8 -*-\nresponse.menu.append(['Homepage',False,URL('restaurant','index')])\nresponse.menu+=[['Manage Orders',False,URL('restaurant','manage_orders')],['Change Menu',False,URL('manage_menu')]]\n\ndef index():\n    return dict()\n\ndef user():\n    return dict(form=resauth())\n\n@resauth.requires_login()\ndef manage_menu():\n    response.title='Manage your menu'\n    addform=SQLFORM(db.dish)\n    if addform.process().accepted:\n        response.flash='%s has been added to the menu' %(addform.vars.name)\n    elif addform.errors:\n        response.flash='Please correct the errors and try again'\n    return dict(addform=addform)\n\n@resauth.requires_login()\ndef manage_orders():\n    q=db.dish.provider==resauth.user_id\n    q&=db.dish.id==db.orders.item_id\n    rows=db(q).select(db.order.ALL,db.dish.ALL)\n    return rows\n\nresponse._vars=response._caller(manage_orders)\n"
+p7
+sS'snapshot'
+p8
+(dp9
+sS'traceback'
+p10
+S'Traceback (most recent call last):\n  File "/home/vedant/Desktop/web2py/gluon/restricted.py", line 224, in restricted\n    exec ccode in environment\n  File "/home/vedant/Desktop/web2py/applications/garden_2_may/controllers/restaurant.py", line 28, in <module>\n  File "/home/vedant/Desktop/web2py/gluon/globals.py", line 393, in <lambda>\n    self._caller = lambda f: f()\n  File "/home/vedant/Desktop/web2py/gluon/tools.py", line 3444, in f\n    return action(*a, **b)\n  File "/home/vedant/Desktop/web2py/applications/garden_2_may/controllers/restaurant.py", line 25, in manage_orders\n    rows=db(q).select(db.order.ALL,db.dish.ALL)\n  File "/home/vedant/Desktop/web2py/gluon/dal/base.py", line 893, in __getattr__\n    return ogetattr(self, key)\nAttributeError: \'DAL\' object has no attribute \'order\'\n'
+p11
+s.

@@ -1,0 +1,794 @@
+(dp1
+S'output'
+p2
+S"<type 'exceptions.AttributeError'> 'NoneType' object has no attribute 'sub_category'"
+p3
+sS'layer'
+p4
+S'/home/vedant/Desktop/web2py/applications/garden_2_may/models/restaurant.py'
+p5
+sS'code'
+p6
+S'# -*- coding: utf-8 -*-\nresauth=Auth(db,controller=\'restaurant\')\nresset=resauth.settings\nresset.table_user_name=\'resauth_user\'\nresset.table_group_name=\'resauth_group\'\nresset.table_membership_name=\'resauth_membership\'\nresset.table_permission_name=\'resauth_permission\'\nresset.table_event_name=\'resauth_event\'\nresset.table_cas_name=\'resauth_cas\'\ndb.define_table(\n    resauth.settings.table_user_name,\n    Field(\'name\',length=128,default=\'\',requires=IS_NOT_EMPTY(error_message=resauth.messages.is_empty)),\n    Field(\'email\',length=128,default=\'\',unique=True),\n    Field(\'contact_number_1\',length=128,default=\'\',requires=IS_MATCH(\'^[0-9]{8,16}$\',error_message=\'Must be a valid phone number\')),\n    Field(\'contact_number_2\',length=128,default=\'\',requires=IS_EMPTY_OR(IS_MATCH(\'^[0-9]{8,16}$\',error_message=\'Must be either empty or a valid phone number\'))),\n    Field(\'city\',db.city),\n    Field(\'address\',length=\'1024\',requires=IS_NOT_EMPTY(error_message=\'Must specify an address\')),\n    Field(\'password\',\'password\',length=512,readable=False,label=\'Password\'),\n    Field(\'registration_key\',length=512,writable=False,readable=False,default=\'\'),\n    Field(\'reset_password_key\',length=512,writable=False,readable=False,default=\'\'),\n    Field(\'registration_id\',length=512,writable=False,readable=False,default=\'\'),\n    format=\'%(name)s\')\n\nruser=db[resauth.settings.table_user_name]\nruser.password.requires=[IS_STRONG(min=8,special=0.0,upper=1,number=1,lower=1),CRYPT()]\nruser.email.requires=[IS_EMAIL(error_message=resauth.messages.invalid_email),IS_NOT_IN_DB(db,ruser.email,error_message="E-mail address already in use")]\nresauth.define_tables(username=False)\n\ndb.define_table(\n    \'dish\',\n    Field(\'name\',length=128,requires=IS_NOT_EMPTY(error_message=\'Name cannot be empty\')),\n    Field(\'price\',length=128,requires=IS_INT_IN_RANGE(17,None)),\n    Field(\'description\',length=256),\n    Field(\'category\',\'reference category\'),\n    Field(\'sub_category\',\'reference sub_category\',requires=db.sub_category[response.vars.sub_category].category==response.vars.category),\n    Field(\'Image\',\'upload\',requires=IS_EMPTY_OR(IS_IMAGE(error_message=\'Uploaded file must be an image\')),autodelete=True),\n    Field(\'provider\',\'reference resauth_user\',writable=False,readable=False,default=resauth.user_id))\n\ndb.define_table(\'orders\',\n                Field(\'item_id\',\'reference dish\',readable=False,writable=False),\n                Field(\'buyer\',\'reference auth_user\',readable=False,writable=False),\n                Field(\'quantity\',writable=False,requires=IS_INT_IN_RANGE(1,20)),\n                Field(\'time\',\'datetime\',default=request.now))\n'
+p7
+sS'snapshot'
+p8
+(dp9
+S'exception'
+p10
+(dp11
+S'__hash__'
+p12
+S"<method-wrapper '__hash__' of exceptions.AttributeError object>"
+p13
+sS'__setattr__'
+p14
+S"<method-wrapper '__setattr__' of exceptions.AttributeError object>"
+p15
+sS'__reduce_ex__'
+p16
+S'<built-in method __reduce_ex__ of exceptions.AttributeError object>'
+p17
+sS'__getslice__'
+p18
+S"<method-wrapper '__getslice__' of exceptions.AttributeError object>"
+p19
+sS'__getitem__'
+p20
+S"<method-wrapper '__getitem__' of exceptions.AttributeError object>"
+p21
+sS'__setstate__'
+p22
+S'<built-in method __setstate__ of exceptions.AttributeError object>'
+p23
+sS'args'
+p24
+S'("\'NoneType\' object has no attribute \'sub_category\'",)'
+p25
+sS'__reduce__'
+p26
+S'<built-in method __reduce__ of exceptions.AttributeError object>'
+p27
+sS'__str__'
+p28
+S"<method-wrapper '__str__' of exceptions.AttributeError object>"
+p29
+sS'__format__'
+p30
+S'<built-in method __format__ of exceptions.AttributeError object>'
+p31
+sS'__getattribute__'
+p32
+S"<method-wrapper '__getattribute__' of exceptions.AttributeError object>"
+p33
+sS'__class__'
+p34
+S"<type 'exceptions.AttributeError'>"
+p35
+sS'__unicode__'
+p36
+S'<built-in method __unicode__ of exceptions.AttributeError object>'
+p37
+sS'__delattr__'
+p38
+S"<method-wrapper '__delattr__' of exceptions.AttributeError object>"
+p39
+sS'__subclasshook__'
+p40
+S'<built-in method __subclasshook__ of type object>'
+p41
+sS'__repr__'
+p42
+S"<method-wrapper '__repr__' of exceptions.AttributeError object>"
+p43
+sS'__dict__'
+p44
+S'{}'
+p45
+sS'__sizeof__'
+p46
+S'<built-in method __sizeof__ of exceptions.AttributeError object>'
+p47
+sS'__doc__'
+p48
+S"'Attribute not found.'"
+p49
+sS'__init__'
+p50
+S"<method-wrapper '__init__' of exceptions.AttributeError object>"
+p51
+sS'__new__'
+p52
+S'<built-in method __new__ of type object>'
+p53
+ssS'evalue'
+p54
+S"'NoneType' object has no attribute 'sub_category'"
+p55
+sS'request'
+p56
+cgluon.html
+XML_unpickle
+p57
+(S's6_\x00\x00<div><table><tr><td style="font-weight:bold;vertical-align:top;">ajax</td><td style="vertical-align:top;">:</td><td><div>True</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">application</td><td style="vertical-align:top;">:</td><td><div>garden_2_may</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">args</td><td style="vertical-align:top;">:</td><td><div><table></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">cid</td><td style="vertical-align:top;">:</td><td><div>c0746158842643</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">client</td><td style="vertical-align:top;">:</td><td><div>127.0.0.1</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">controller</td><td style="vertical-align:top;">:</td><td><div>appadmin</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">cookies</td><td style="vertical-align:top;">:</td><td><div><table><tr><td style="font-weight:bold;vertical-align:top;">session_id_admin</td><td style="vertical-align:top;">:</td><td><div>127.0.0.1-49dfc4c7-8f4d-4ac7-bb2a-6617074ca27d<table><tr><td style="font-weight:bold;vertical-align:top;">comment</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">domain</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">expires</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">httponly</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">max-age</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">path</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">secure</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">version</td><td style="vertical-align:top;">:</td><td><div></div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_id_garden_2_may</td><td style="vertical-align:top;">:</td><td><div>127.0.0.1-266fb5d7-ffc7-4328-bd37-36588aea82b1<table><tr><td style="font-weight:bold;vertical-align:top;">comment</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">domain</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">expires</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">httponly</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">max-age</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">path</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">secure</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">version</td><td style="vertical-align:top;">:</td><td><div></div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_id_welcome</td><td style="vertical-align:top;">:</td><td><div>127.0.0.1-1ca37e64-02e1-4045-99c3-04a682167985<table><tr><td style="font-weight:bold;vertical-align:top;">comment</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">domain</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">expires</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">httponly</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">max-age</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">path</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">secure</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">version</td><td style="vertical-align:top;">:</td><td><div></div></td></tr></table></div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">env</td><td style="vertical-align:top;">:</td><td><div><table><tr><td style="font-weight:bold;vertical-align:top;">HTTP_ACCEPT</td><td style="vertical-align:top;">:</td><td><div>*/*</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTP_ACCEPT_ENCODING</td><td style="vertical-align:top;">:</td><td><div>gzip, deflate</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTP_ACCEPT_LANGUAGE</td><td style="vertical-align:top;">:</td><td><div>en-US,en;q=0.5</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTP_CONNECTION</td><td style="vertical-align:top;">:</td><td><div>keep-alive</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTP_COOKIE</td><td style="vertical-align:top;">:</td><td><div>session_id_welcome=127.0.0.1-1ca37e64-02e1-4045-99c3-04a682167985; session_id_garden_2_may=127.0.0.1-266fb5d7-ffc7-4328-bd37-36588aea82b1; session_id_admin=127.0.0.1-49dfc4c7-8f4d-4ac7-bb2a-6617074ca27d</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTP_HOST</td><td style="vertical-align:top;">:</td><td><div>127.0.0.1:8000</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTP_REFERER</td><td style="vertical-align:top;">:</td><td><div>http://127.0.0.1:8000/admin/default/edit/garden_2_may/models/restaurant.py?id=models__restaurant__py</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTP_USER_AGENT</td><td style="vertical-align:top;">:</td><td><div>Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:37.0) Gecko/20100101 Firefox/37.0</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTP_WEB2PY_COMPONENT_ELEMENT</td><td style="vertical-align:top;">:</td><td><div>c0746158842643</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTP_WEB2PY_COMPONENT_LOCATION</td><td style="vertical-align:top;">:</td><td><div>http://127.0.0.1:8000/admin/default/edit/garden_2_may/models/restaurant.py?id=models__restaurant__py</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTP_X_REQUESTED_WITH</td><td style="vertical-align:top;">:</td><td><div>XMLHttpRequest</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">PATH_INFO</td><td style="vertical-align:top;">:</td><td><div>/garden_2_may/appadmin/hooks</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">QUERY_STRING</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">REMOTE_ADDR</td><td style="vertical-align:top;">:</td><td><div>127.0.0.1</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">REMOTE_PORT</td><td style="vertical-align:top;">:</td><td><div>34112</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">REQUEST_METHOD</td><td style="vertical-align:top;">:</td><td><div>GET</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">SCRIPT_NAME</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">SERVER_NAME</td><td style="vertical-align:top;">:</td><td><div>Gopi-Lenovo</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">SERVER_PORT</td><td style="vertical-align:top;">:</td><td><div>8000</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">SERVER_PROTOCOL</td><td style="vertical-align:top;">:</td><td><div>HTTP/1.1</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">SERVER_SOFTWARE</td><td style="vertical-align:top;">:</td><td><div>Rocket 1.2.6</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">app_folders</td><td style="vertical-align:top;">:</td><td><div>set([&#x27;/home/vedant/Desktop/web2py/applications/admin/&#x27;, &#x27;/home/vedant/Desktop/web2py/applications/garden_2_may/&#x27;])</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">applications_parent</td><td style="vertical-align:top;">:</td><td><div>/home/vedant/Desktop/web2py</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">cmd_args</td><td style="vertical-align:top;">:</td><td><div><table></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">cmd_options</td><td style="vertical-align:top;">:</td><td><div>&lt;Values at 0x7fcc47c79518: {&#x27;verbose&#x27;: False, &#x27;ip&#x27;: &#x27;127.0.0.1&#x27;, &#x27;debuglevel&#x27;: 30, &#x27;with_scheduler&#x27;: False, &#x27;ips&#x27;: [&#x27;127.0.1.1&#x27;], &#x27;shutdown_timeout&#x27;: 5, &#x27;taskbar&#x27;: False, &#x27;with_coverage&#x27;: False, &#x27;scheduler_groups&#x27;: None, &#x27;port&#x27;: 8000, &#x27;maxthreads&#x27;: None, &#x27;softcron&#x27;: False, &#x27;server_name&#x27;: &#x27;Gopi-Lenovo&#x27;, &#x27;bpython&#x27;: False, &#x27;nogui&#x27;: True, &#x27;pid_filename&#x27;: &#x27;httpserver.pid&#x27;, &#x27;extcron&#x27;: False, &#x27;runcron&#x27;: False, &#x27;run_system_tests&#x27;: False, &#x27;test&#x27;: None, &#x27;folder&#x27;: &#x27;/home/vedant/Desktop/web2py&#x27;, &#x27;config&#x27;: &#x27;&#x27;, &#x27;minthreads&#x27;: None, &#x27;shell&#x27;: None, &#x27;run&#x27;: &#x27;&#x27;, &#x27;log_filename&#x27;: &#x27;httpserver.log&#x27;, &#x27;profiler_dir&#x27;: None, &#x27;args&#x27;: [&#x27;&#x27;], &#x27;socket_timeout&#x27;: 5, &#x27;ssl_ca_certificate&#x27;: None, &#x27;scheduler&#x27;: None, &#x27;interfaces&#x27;: None, &#x27;ssl_private_key&#x27;: &#x27;&#x27;, &#x27;gae&#x27;: None, &#x27;password&#x27;: &#x27; &#x27;, &#x27;request_queue_size&#x27;: 5, &#x27;ssl_certificate&#x27;: &#x27;&#x27;, &#x27;cronjob&#x27;: False, &#x27;numthreads&#x27;: None, &#x27;quiet&#x27;: False, &#x27;import_models&#x27;: False, &#x27;timeout&#x27;: 10, &#x27;plain&#x27;: False, &#x27;nobanner&#x27;: False}&gt;</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">db_sessions</td><td style="vertical-align:top;">:</td><td><div>set([])</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">debugging</td><td style="vertical-align:top;">:</td><td><div>True</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">gluon_parent</td><td style="vertical-align:top;">:</td><td><div>/home/vedant/Desktop/web2py</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_accept</td><td style="vertical-align:top;">:</td><td><div>*/*</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_accept_encoding</td><td style="vertical-align:top;">:</td><td><div>gzip, deflate</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_accept_language</td><td style="vertical-align:top;">:</td><td><div>en-US,en;q=0.5</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_connection</td><td style="vertical-align:top;">:</td><td><div>keep-alive</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_cookie</td><td style="vertical-align:top;">:</td><td><div>session_id_welcome=127.0.0.1-1ca37e64-02e1-4045-99c3-04a682167985; session_id_garden_2_may=127.0.0.1-266fb5d7-ffc7-4328-bd37-36588aea82b1; session_id_admin=127.0.0.1-49dfc4c7-8f4d-4ac7-bb2a-6617074ca27d</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_host</td><td style="vertical-align:top;">:</td><td><div>127.0.0.1:8000</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_referer</td><td style="vertical-align:top;">:</td><td><div>http://127.0.0.1:8000/admin/default/edit/garden_2_may/models/restaurant.py?id=models__restaurant__py</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_user_agent</td><td style="vertical-align:top;">:</td><td><div>Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:37.0) Gecko/20100101 Firefox/37.0</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_web2py_component_element</td><td style="vertical-align:top;">:</td><td><div>c0746158842643</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_web2py_component_location</td><td style="vertical-align:top;">:</td><td><div>http://127.0.0.1:8000/admin/default/edit/garden_2_may/models/restaurant.py?id=models__restaurant__py</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_x_requested_with</td><td style="vertical-align:top;">:</td><td><div>XMLHttpRequest</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">is_jython</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">is_pypy</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">is_source</td><td style="vertical-align:top;">:</td><td><div>True</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">local_hosts</td><td style="vertical-align:top;">:</td><td><div><table><tr><td><div>Gopi-Lenovo</div></td></tr><tr><td><div>::1</div></td></tr><tr><td><div>127.0.1.1</div></td></tr><tr><td><div>::ffff:127.0.0.1</div></td></tr><tr><td><div>127.0.0.1</div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">path_info</td><td style="vertical-align:top;">:</td><td><div>/garden_2_may/appadmin/hooks</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">query_string</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">remote_addr</td><td style="vertical-align:top;">:</td><td><div>127.0.0.1</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">remote_port</td><td style="vertical-align:top;">:</td><td><div>34112</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">request_method</td><td style="vertical-align:top;">:</td><td><div>GET</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">request_uri</td><td style="vertical-align:top;">:</td><td><div>/garden_2_may/appadmin/hooks</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">script_name</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">server_name</td><td style="vertical-align:top;">:</td><td><div>Gopi-Lenovo</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">server_port</td><td style="vertical-align:top;">:</td><td><div>8000</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">server_protocol</td><td style="vertical-align:top;">:</td><td><div>HTTP/1.1</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">server_software</td><td style="vertical-align:top;">:</td><td><div>Rocket 1.2.6</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">web2py_path</td><td style="vertical-align:top;">:</td><td><div>/home/vedant/Desktop/web2py</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">web2py_version</td><td style="vertical-align:top;">:</td><td><div>2.9.12-stable+timestamp.2015.01.17.06.11.03</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi.errors</td><td style="vertical-align:top;">:</td><td><div>&lt;open file &#x27;&lt;stderr&gt;&#x27;, mode &#x27;w&#x27; at 0x7fcc4bba51e0&gt;</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi.file_wrapper</td><td style="vertical-align:top;">:</td><td><div>&lt;class wsgiref.util.FileWrapper at 0x7fcc47c98120&gt;</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi.input</td><td style="vertical-align:top;">:</td><td><div>&lt;socket._fileobject object at 0x7fcc2c3e42d0&gt;</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi.multiprocess</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi.multithread</td><td style="vertical-align:top;">:</td><td><div>True</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi.run_once</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi.url_scheme</td><td style="vertical-align:top;">:</td><td><div>http</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi.version</td><td style="vertical-align:top;">:</td><td><div><table><tr><td><div>1</div></td></tr><tr><td><div>0</div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi_errors</td><td style="vertical-align:top;">:</td><td><div>&lt;open file &#x27;&lt;stderr&gt;&#x27;, mode &#x27;w&#x27; at 0x7fcc4bba51e0&gt;</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi_file_wrapper</td><td style="vertical-align:top;">:</td><td><div>&lt;class wsgiref.util.FileWrapper at 0x7fcc47c98120&gt;</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi_input</td><td style="vertical-align:top;">:</td><td><div>&lt;socket._fileobject object at 0x7fcc2c3e42d0&gt;</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi_multiprocess</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi_multithread</td><td style="vertical-align:top;">:</td><td><div>True</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi_run_once</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi_url_scheme</td><td style="vertical-align:top;">:</td><td><div>http</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi_version</td><td style="vertical-align:top;">:</td><td><div><table><tr><td><div>1</div></td></tr><tr><td><div>0</div></td></tr></table></div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">extension</td><td style="vertical-align:top;">:</td><td><div>html</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">folder</td><td style="vertical-align:top;">:</td><td><div>/home/vedant/Desktop/web2py/applications/garden_2_may/</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">function</td><td style="vertical-align:top;">:</td><td><div>hooks</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">global_settings</td><td style="vertical-align:top;">:</td><td><div><table><tr><td style="font-weight:bold;vertical-align:top;">app_folders</td><td style="vertical-align:top;">:</td><td><div>set([&#x27;/home/vedant/Desktop/web2py/applications/admin/&#x27;, &#x27;/home/vedant/Desktop/web2py/applications/garden_2_may/&#x27;])</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">applications_parent</td><td style="vertical-align:top;">:</td><td><div>/home/vedant/Desktop/web2py</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">cmd_args</td><td style="vertical-align:top;">:</td><td><div><table></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">cmd_options</td><td style="vertical-align:top;">:</td><td><div>&lt;Values at 0x7fcc47c79518: {&#x27;verbose&#x27;: False, &#x27;ip&#x27;: &#x27;127.0.0.1&#x27;, &#x27;debuglevel&#x27;: 30, &#x27;with_scheduler&#x27;: False, &#x27;ips&#x27;: [&#x27;127.0.1.1&#x27;], &#x27;shutdown_timeout&#x27;: 5, &#x27;taskbar&#x27;: False, &#x27;with_coverage&#x27;: False, &#x27;scheduler_groups&#x27;: None, &#x27;port&#x27;: 8000, &#x27;maxthreads&#x27;: None, &#x27;softcron&#x27;: False, &#x27;server_name&#x27;: &#x27;Gopi-Lenovo&#x27;, &#x27;bpython&#x27;: False, &#x27;nogui&#x27;: True, &#x27;pid_filename&#x27;: &#x27;httpserver.pid&#x27;, &#x27;extcron&#x27;: False, &#x27;runcron&#x27;: False, &#x27;run_system_tests&#x27;: False, &#x27;test&#x27;: None, &#x27;folder&#x27;: &#x27;/home/vedant/Desktop/web2py&#x27;, &#x27;config&#x27;: &#x27;&#x27;, &#x27;minthreads&#x27;: None, &#x27;shell&#x27;: None, &#x27;run&#x27;: &#x27;&#x27;, &#x27;log_filename&#x27;: &#x27;httpserver.log&#x27;, &#x27;profiler_dir&#x27;: None, &#x27;args&#x27;: [&#x27;&#x27;], &#x27;socket_timeout&#x27;: 5, &#x27;ssl_ca_certificate&#x27;: None, &#x27;scheduler&#x27;: None, &#x27;interfaces&#x27;: None, &#x27;ssl_private_key&#x27;: &#x27;&#x27;, &#x27;gae&#x27;: None, &#x27;password&#x27;: &#x27; &#x27;, &#x27;request_queue_size&#x27;: 5, &#x27;ssl_certificate&#x27;: &#x27;&#x27;, &#x27;cronjob&#x27;: False, &#x27;numthreads&#x27;: None, &#x27;quiet&#x27;: False, &#x27;import_models&#x27;: False, &#x27;timeout&#x27;: 10, &#x27;plain&#x27;: False, &#x27;nobanner&#x27;: False}&gt;</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">db_sessions</td><td style="vertical-align:top;">:</td><td><div>set([])</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">debugging</td><td style="vertical-align:top;">:</td><td><div>True</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">gluon_parent</td><td style="vertical-align:top;">:</td><td><div>/home/vedant/Desktop/web2py</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">is_jython</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">is_pypy</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">is_source</td><td style="vertical-align:top;">:</td><td><div>True</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">local_hosts</td><td style="vertical-align:top;">:</td><td><div><table><tr><td><div>Gopi-Lenovo</div></td></tr><tr><td><div>::1</div></td></tr><tr><td><div>127.0.1.1</div></td></tr><tr><td><div>::ffff:127.0.0.1</div></td></tr><tr><td><div>127.0.0.1</div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">web2py_version</td><td style="vertical-align:top;">:</td><td><div>2.9.12-stable+timestamp.2015.01.17.06.11.03</div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">is_https</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">is_local</td><td style="vertical-align:top;">:</td><td><div>True</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">is_restful</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">is_sheduler</td><td style="vertical-align:top;">:</td><td><div>None</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">is_shell</td><td style="vertical-align:top;">:</td><td><div>None</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">now</td><td style="vertical-align:top;">:</td><td><div>datetime.datetime(2015, 5, 3, 10, 17, 19, 622429)</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">raw_args</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">raw_extension</td><td style="vertical-align:top;">:</td><td><div>None</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">url</td><td style="vertical-align:top;">:</td><td><div>/garden_2_may/appadmin/hooks</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">utcnow</td><td style="vertical-align:top;">:</td><td><div>datetime.datetime(2015, 5, 3, 4, 47, 19, 622439)</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">uuid</td><td style="vertical-align:top;">:</td><td><div>garden_2_may/127.0.0.1.2015-05-03.10-17-19.a63b4ef3-e36f-4143-83b8-cc733d4cf879</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi</td><td style="vertical-align:top;">:</td><td><div>&lt;gluon.main.LazyWSGI object at 0x7fcc2c4a6150&gt;</div></td></tr></table></div>'
+tRp58
+sS'frames'
+p59
+(lp60
+(dp61
+S'file'
+p62
+S'/home/vedant/Desktop/web2py/gluon/restricted.py'
+p63
+sS'dump'
+p64
+(dp65
+S'environment'
+p66
+S"{'A': <class 'gluon.html.A'>, 'ANY_OF': <class 'gluon.validators.ANY_OF'>, 'ASSIGNJS': <function ASSIGNJS>, 'Auth': <class 'gluon.tools.Auth'>, 'B': <class 'gluon.html.B'>, 'BEAUTIFY': <class 'gluon.html.BEAUTIFY'>, 'BODY': <class 'gluon.html.BODY'>, 'BR': <class 'gluon.html.BR'>, 'BUTTON': <class 'gluon.html.BUTTON'>, 'CAT': <class 'gluon.html.CAT'>, ...}"
+p67
+sS'ccode'
+p68
+S'<code object <module> at 0x7fcc2c4bfab0, file "/...tions/garden_2_may/models/restaurant.py", line 2>'
+p69
+ssS'lnum'
+p70
+I224
+sS'lines'
+p71
+(dp72
+I224
+S'        exec ccode in environment'
+p73
+sI225
+S'    except HTTP:'
+p74
+sI226
+S'        raise'
+p75
+sI227
+S'    except RestrictedError:'
+p76
+sI228
+S'        # do not encapsulate (obfuscate) the original RestrictedError'
+p77
+sI219
+S'    try:'
+p78
+sI220
+S'        if isinstance(code, types.CodeType):'
+p79
+sI221
+S'            ccode = code'
+p80
+sI222
+S'        else:'
+p81
+sI223
+S'            ccode = compile2(code, layer)'
+p82
+ssS'call'
+p83
+S'(code="# -*- coding: utf-8 -*-\\nresauth=Auth(db,controll...   Field(\'time\',\'datetime\',default=request.now))\\n", environment={\'A\': <class \'gluon.html.A\'>, \'ANY_OF\': <class \'gluon.validators.ANY_OF\'>, \'ASSIGNJS\': <function ASSIGNJS>, \'Auth\': <class \'gluon.tools.Auth\'>, \'B\': <class \'gluon.html.B\'>, \'BEAUTIFY\': <class \'gluon.html.BEAUTIFY\'>, \'BODY\': <class \'gluon.html.BODY\'>, \'BR\': <class \'gluon.html.BR\'>, \'BUTTON\': <class \'gluon.html.BUTTON\'>, \'CAT\': <class \'gluon.html.CAT\'>, ...}, layer=\'/home/vedant/Desktop/web2py/applications/garden_2_may/models/restaurant.py\')'
+p84
+sS'func'
+p85
+S'restricted'
+p86
+sa(dp87
+g62
+S'/home/vedant/Desktop/web2py/applications/garden_2_may/models/restaurant.py'
+p88
+sg64
+(dp89
+S'db'
+p90
+S'<DAL uri="sqlite://storage.sqlite">'
+p91
+sS'response.vars.sub_category'
+p92
+S'undefined'
+p93
+sS'Field'
+p94
+S"<class 'gluon.dal.objects.Field'>"
+p95
+sS'db.sub_category'
+p96
+S'<Table sub_category (id,name,category)>'
+p97
+sS'response.vars.category'
+p98
+g93
+sS'response.vars'
+p99
+S'None'
+p100
+sS'requires'
+p101
+g93
+sS'response'
+p102
+S"<Storage {'body': <cStringIO.StringO object at 0... 0x7fcc2c480f50>, 'view': 'appadmin/hooks.html'}>"
+p103
+ssg70
+I35
+sg71
+(dp104
+I32
+S"    Field('price',length=128,requires=IS_INT_IN_RANGE(17,None)),"
+p105
+sI33
+S"    Field('description',length=256),"
+p106
+sI34
+S"    Field('category','reference category'),"
+p107
+sI35
+S"    Field('sub_category','reference sub_category',requires=db.sub_category[response.vars.sub_category].category==response.vars.category),"
+p108
+sI36
+S"    Field('Image','upload',requires=IS_EMPTY_OR(IS_IMAGE(error_message='Uploaded file must be an image')),autodelete=True),"
+p109
+sI37
+S"    Field('provider','reference resauth_user',writable=False,readable=False,default=resauth.user_id))"
+p110
+sI38
+S''
+sI39
+S"db.define_table('orders',"
+p111
+sI30
+S"    'dish',"
+p112
+sI31
+S"    Field('name',length=128,requires=IS_NOT_EMPTY(error_message='Name cannot be empty')),"
+p113
+ssg83
+S'()'
+p114
+sg85
+S'<module>'
+p115
+sasS'pyver'
+p116
+S'Python 2.7.6: /usr/bin/python (prefix: /usr)'
+p117
+sS'session'
+p118
+g57
+(S's\xa8\x0b\x00\x00<div><table><tr><td style="font-weight:bold;vertical-align:top;">auth</td><td style="vertical-align:top;">:</td><td><div><table><tr><td style="font-weight:bold;vertical-align:top;">expiration</td><td style="vertical-align:top;">:</td><td><div>3600</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">hmac_key</td><td style="vertical-align:top;">:</td><td><div>6735c4c8-c25b-4071-b1dd-f5cb55e34bd6</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">last_visit</td><td style="vertical-align:top;">:</td><td><div>datetime.datetime(2015, 5, 3, 10, 11, 36, 497583)</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">remember_me</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">user</td><td style="vertical-align:top;">:</td><td><div><table><tr><td style="font-weight:bold;vertical-align:top;">address</td><td style="vertical-align:top;">:</td><td><div>East West Up Further</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">city</td><td style="vertical-align:top;">:</td><td><div>2</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">contact_number_1</td><td style="vertical-align:top;">:</td><td><div>1234567890</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">contact_number_2</td><td style="vertical-align:top;">:</td><td><div>None</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">email</td><td style="vertical-align:top;">:</td><td><div>abh.vii@sdf.com</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">id</td><td style="vertical-align:top;">:</td><td><div>1L</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">name</td><td style="vertical-align:top;">:</td><td><div>chaiwala</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">registration_id</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">registration_key</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">reset_password_key</td><td style="vertical-align:top;">:</td><td><div></div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">user_groups</td><td style="vertical-align:top;">:</td><td><div><table><tr><td style="font-weight:bold;vertical-align:top;">1</td><td style="vertical-align:top;">:</td><td><div>user_1</div></td></tr></table></div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">flash</td><td style="vertical-align:top;">:</td><td><div>None</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">last_orderby</td><td style="vertical-align:top;">:</td><td><div>None</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">last_query</td><td style="vertical-align:top;">:</td><td><div>db.dish.id&gt;0</div></td></tr></table></div>'
+tRp119
+sS'etype'
+p120
+S"<type 'exceptions.AttributeError'>"
+p121
+sS'date'
+p122
+S'Sun May  3 10:17:19 2015'
+p123
+sS'response'
+p124
+g57
+(S's\xb7\x18\x00\x00<div><table><tr><td style="font-weight:bold;vertical-align:top;">body</td><td style="vertical-align:top;">:</td><td><div>&lt;cStringIO.StringO object at 0x7fcc2c4e06c0&gt;</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">cookies</td><td style="vertical-align:top;">:</td><td><div><table><tr><td style="font-weight:bold;vertical-align:top;">session_id_garden_2_may</td><td style="vertical-align:top;">:</td><td><div>127.0.0.1-266fb5d7-ffc7-4328-bd37-36588aea82b1<table><tr><td style="font-weight:bold;vertical-align:top;">comment</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">domain</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">expires</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">httponly</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">max-age</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">path</td><td style="vertical-align:top;">:</td><td><div>/</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">secure</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">version</td><td style="vertical-align:top;">:</td><td><div></div></td></tr></table></div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">delimiters</td><td style="vertical-align:top;">:</td><td><div><table><tr><td><div>{{</div></td></tr><tr><td><div>}}</div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">files</td><td style="vertical-align:top;">:</td><td><div><table></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">flash</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">form_label_separator</td><td style="vertical-align:top;">:</td><td><div>: </div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">formstyle</td><td style="vertical-align:top;">:</td><td><div>table3cols</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">generic_patterns</td><td style="vertical-align:top;">:</td><td><div><table><tr><td><div>*</div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">headers</td><td style="vertical-align:top;">:</td><td><div><table><tr><td style="font-weight:bold;vertical-align:top;">X-Powered-By</td><td style="vertical-align:top;">:</td><td><div>web2py</div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">logo</td><td style="vertical-align:top;">:</td><td><div><b class="brand">Garden</b></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">menu</td><td style="vertical-align:top;">:</td><td><div><table></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">meta</td><td style="vertical-align:top;">:</td><td><div><table></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">models_to_run</td><td style="vertical-align:top;">:</td><td><div><table><tr><td><div>^\\w+\\.py$</div></td></tr><tr><td><div>^appadmin/\\w+\\.py$</div></td></tr><tr><td><div>^appadmin/hooks/\\w+\\.py$</div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">postprocessing</td><td style="vertical-align:top;">:</td><td><div><table></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_client</td><td style="vertical-align:top;">:</td><td><div>127.0.0.1</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_cookie_compression_level</td><td style="vertical-align:top;">:</td><td><div>None</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_cookie_expires</td><td style="vertical-align:top;">:</td><td><div>None</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_cookie_key</td><td style="vertical-align:top;">:</td><td><div>None</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_data_name</td><td style="vertical-align:top;">:</td><td><div>session_data_garden_2_may</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_file</td><td style="vertical-align:top;">:</td><td><div>&lt;open file &#x27;/home/vedant/Desktop/web2py/applications/garden_2_may/sessions/18e/026/127.0.0.1-266fb5d7-ffc7-4328-bd37-36588aea82b1&#x27;, mode &#x27;rb+&#x27; at 0x7fcc2c3b7540&gt;</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_filename</td><td style="vertical-align:top;">:</td><td><div>/home/vedant/Desktop/web2py/applications/garden_2_may/sessions/127.0.0.1-266fb5d7-ffc7-4328-bd37-36588aea82b1</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_hash</td><td style="vertical-align:top;">:</td><td><div>82f24884e2e7a0c105d06d1bb36639c0</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_id</td><td style="vertical-align:top;">:</td><td><div>127.0.0.1-266fb5d7-ffc7-4328-bd37-36588aea82b1</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_id_name</td><td style="vertical-align:top;">:</td><td><div>session_id_garden_2_may</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_locked</td><td style="vertical-align:top;">:</td><td><div>True</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_masterapp</td><td style="vertical-align:top;">:</td><td><div>garden_2_may</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_new</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_storage_type</td><td style="vertical-align:top;">:</td><td><div>file</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">status</td><td style="vertical-align:top;">:</td><td><div>200</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">view</td><td style="vertical-align:top;">:</td><td><div>appadmin/hooks.html</div></td></tr></table></div>'
+tRp125
+sS'locals'
+p126
+(dp127
+S'OBJECT'
+p128
+S"<class 'gluon.html.OBJECT'>"
+p129
+sS'SQLDB'
+p130
+S"<class 'gluon.dal.base.DAL'>"
+p131
+sg118
+S"<Storage {'_formkey[sub_category/create]': ['3f4...fe0e1', '2820b6b5-d063-400c-9399-e03e47fe5e92']}>"
+p132
+sS'LINK'
+p133
+S"<class 'gluon.html.LINK'>"
+p134
+sS'BR'
+p135
+S"<class 'gluon.html.BR'>"
+p136
+sS'local_import'
+p137
+S'<function <lambda>>'
+p138
+sS'OPTGROUP'
+p139
+S"<class 'gluon.html.OPTGROUP'>"
+p140
+sS'__package__'
+p141
+S'None'
+p142
+sS'PRE'
+p143
+S"<class 'gluon.html.PRE'>"
+p144
+sS'IS_INT_IN_RANGE'
+p145
+S"<class 'gluon.validators.IS_INT_IN_RANGE'>"
+p146
+sS'IS_LOWER'
+p147
+S"<class 'gluon.validators.IS_LOWER'>"
+p148
+sS'IS_STRONG'
+p149
+S"<class 'gluon.validators.IS_STRONG'>"
+p150
+sS'cache'
+p151
+S'<gluon.cache.Cache object>'
+p152
+sS'IS_IN_DB'
+p153
+S"<class 'gluon.validators.IS_IN_DB'>"
+p154
+sS'TAG'
+p155
+S'<gluon.html.__TAG__ object>'
+p156
+sS'SQLField'
+p157
+S"<class 'gluon.dal.objects.Field'>"
+p158
+sS'BODY'
+p159
+S"<class 'gluon.html.BODY'>"
+p160
+sS'IS_DATE_IN_RANGE'
+p161
+S"<class 'gluon.validators.IS_DATE_IN_RANGE'>"
+p162
+sS'TH'
+p163
+S"<class 'gluon.html.TH'>"
+p164
+sS'URL'
+p165
+S'<function URL>'
+p166
+sS'__file__'
+p167
+S"'/home/vedant/Desktop/web2py/applications/garden_2_may/models/restaurant.py'"
+p168
+sS'db'
+p169
+S'<DAL uri="sqlite://storage.sqlite">'
+p170
+sS'P'
+S"<class 'gluon.html.P'>"
+p171
+sS'TFOOT'
+p172
+S"<class 'gluon.html.TFOOT'>"
+p173
+sS'XHTML'
+p174
+S"<class 'gluon.html.XHTML'>"
+p175
+sS'ON'
+p176
+S'True'
+p177
+sS'OL'
+p178
+S"<class 'gluon.html.OL'>"
+p179
+sS'TEXTAREA'
+p180
+S"<class 'gluon.html.TEXTAREA'>"
+p181
+sS'MENU'
+p182
+S"<class 'gluon.html.MENU'>"
+p183
+sS'LOAD'
+p184
+S'<function LOAD>'
+p185
+sS'CODE'
+p186
+S"<class 'gluon.html.CODE'>"
+p187
+sS'HTTP'
+p188
+S"<class 'gluon.http.HTTP'>"
+p189
+sS'HR'
+p190
+S"<class 'gluon.html.HR'>"
+p191
+sS'resauth'
+p192
+S'<gluon.tools.Auth object>'
+p193
+sS'HEAD'
+p194
+S"<class 'gluon.html.HEAD'>"
+p195
+sS'LABEL'
+p196
+S"<class 'gluon.html.LABEL'>"
+p197
+sS'CLEANUP'
+p198
+S"<class 'gluon.validators.CLEANUP'>"
+p199
+sS'userauth'
+p200
+S'<gluon.tools.Auth object>'
+p201
+sS'SELECT'
+p202
+S"<class 'gluon.html.SELECT'>"
+p203
+sS'CENTER'
+p204
+S"<class 'gluon.html.CENTER'>"
+p205
+sS'Auth'
+p206
+S"<class 'gluon.tools.Auth'>"
+p207
+sS'__builtins__'
+p208
+S"{'ArithmeticError': <type 'exceptions.ArithmeticError'>, 'AssertionError': <type 'exceptions.AssertionError'>, 'AttributeError': <type 'exceptions.AttributeError'>, 'BaseException': <type 'exceptions.BaseException'>, 'BufferError': <type 'exceptions.BufferError'>, 'BytesWarning': <type 'exceptions.BytesWarning'>, 'DeprecationWarning': <type 'exceptions.DeprecationWarning'>, 'EOFError': <type 'exceptions.EOFError'>, 'Ellipsis': Ellipsis, 'EnvironmentError': <type 'exceptions.EnvironmentError'>, ...}"
+p209
+sS'HTML'
+p210
+S"<class 'gluon.html.HTML'>"
+p211
+sS'SQLFORM'
+p212
+S"<class 'gluon.sqlhtml.SQLFORM'>"
+p213
+sS'EM'
+p214
+S"<class 'gluon.html.EM'>"
+p215
+sS'redirect'
+p216
+S'<function redirect>'
+p217
+sS'FIELDSET'
+p218
+S"<class 'gluon.html.FIELDSET'>"
+p219
+sS'IS_EQUAL_TO'
+p220
+S"<class 'gluon.validators.IS_EQUAL_TO'>"
+p221
+sS'IS_PHONE'
+p222
+S"<class '__restricted__.IS_PHONE'>"
+p223
+sS'embed64'
+p224
+S'<function embed64>'
+p225
+sS'Validator'
+p226
+S"<class 'gluon.validators.Validator'>"
+p227
+sS'IS_LIST_OF'
+p228
+S"<class 'gluon.validators.IS_LIST_OF'>"
+p229
+sS'__name__'
+p230
+S"'__restricted__'"
+p231
+sS'EMBED'
+p232
+S"<class 'gluon.html.EMBED'>"
+p233
+sS'FORM'
+p234
+S"<class 'gluon.html.FORM'>"
+p235
+sS'IS_DATETIME'
+p236
+S"<class 'gluon.validators.IS_DATETIME'>"
+p237
+sS'H2'
+p238
+S"<class 'gluon.html.H2'>"
+p239
+sS'H3'
+p240
+S"<class 'gluon.html.H3'>"
+p241
+sS'BUTTON'
+p242
+S"<class 'gluon.html.BUTTON'>"
+p243
+sS'H1'
+p244
+S"<class 'gluon.html.H1'>"
+p245
+sS'H6'
+p246
+S"<class 'gluon.html.H6'>"
+p247
+sS'H4'
+p248
+S"<class 'gluon.html.H4'>"
+p249
+sS'H5'
+p250
+S"<class 'gluon.html.H5'>"
+p251
+sS'UL'
+p252
+S"<class 'gluon.html.UL'>"
+p253
+sS'IS_UPPER'
+p254
+S"<class 'gluon.validators.IS_UPPER'>"
+p255
+sS'xmlescape'
+p256
+S'<function xmlescape>'
+p257
+sS'IS_TIME'
+p258
+S"<class 'gluon.validators.IS_TIME'>"
+p259
+sS'OPTION'
+p260
+S"<class 'gluon.html.OPTION'>"
+p261
+sS'TITLE'
+p262
+S"<class 'gluon.html.TITLE'>"
+p263
+sS'CRYPT'
+p264
+S"<class 'gluon.validators.CRYPT'>"
+p265
+sS'IS_EMPTY_OR'
+p266
+S"<class 'gluon.validators.IS_EMPTY_OR'>"
+p267
+sS'MARKMIN'
+p268
+S"<class 'gluon.html.MARKMIN'>"
+p269
+sS'INPUT'
+p270
+S"<class 'gluon.html.INPUT'>"
+p271
+sS'STRONG'
+p272
+S"<class 'gluon.html.STRONG'>"
+p273
+sS'COL'
+p274
+S"<class 'gluon.html.COL'>"
+p275
+sS'SCRIPT'
+p276
+S"<class 'gluon.html.SCRIPT'>"
+p277
+sS'TABLE'
+p278
+S"<class 'gluon.html.TABLE'>"
+p279
+sS'IS_IPV4'
+p280
+S"<class 'gluon.validators.IS_IPV4'>"
+p281
+sS'IS_LENGTH'
+p282
+S"<class 'gluon.validators.IS_LENGTH'>"
+p283
+sS'IS_IPV6'
+p284
+S"<class 'gluon.validators.IS_IPV6'>"
+p285
+sS'XML'
+p286
+S"<class 'gluon.html.XML'>"
+p287
+sS'B'
+S"<class 'gluon.html.B'>"
+p288
+sS'IMG'
+p289
+S"<class 'gluon.html.IMG'>"
+p290
+sS'SQLTABLE'
+p291
+S"<class 'gluon.sqlhtml.SQLTABLE'>"
+p292
+sS'IS_MATCH'
+p293
+S"<class 'gluon.validators.IS_MATCH'>"
+p294
+sS'IS_ALPHANUMERIC'
+p295
+S"<class 'gluon.validators.IS_ALPHANUMERIC'>"
+p296
+sS'SPAN'
+p297
+S"<class 'gluon.html.SPAN'>"
+p298
+sS'IS_JSON'
+p299
+S"<class 'gluon.validators.IS_JSON'>"
+p300
+sS'IS_IPADDRESS'
+p301
+S"<class 'gluon.validators.IS_IPADDRESS'>"
+p302
+sS'IS_SLUG'
+p303
+S"<class 'gluon.validators.IS_SLUG'>"
+p304
+sS'BEAUTIFY'
+p305
+S"<class 'gluon.html.BEAUTIFY'>"
+p306
+sS'META'
+p307
+S"<class 'gluon.html.META'>"
+p308
+sS'ruser'
+p309
+S'<Table resauth_user (id,name,email,contact_numbe...stration_key,reset_password_key,registration_id)>'
+p310
+sS'IS_DATE'
+p311
+S"<class 'gluon.validators.IS_DATE'>"
+p312
+sS'IS_EMAIL'
+p313
+S"<class 'gluon.validators.IS_EMAIL'>"
+p314
+sS'IS_NOT_EMPTY'
+p315
+S"<class 'gluon.validators.IS_NOT_EMPTY'>"
+p316
+sS'IS_FLOAT_IN_RANGE'
+p317
+S"<class 'gluon.validators.IS_FLOAT_IN_RANGE'>"
+p318
+sS'TBODY'
+p319
+S"<class 'gluon.html.TBODY'>"
+p320
+sS'CAT'
+p321
+S"<class 'gluon.html.CAT'>"
+p322
+sS'Field'
+p323
+S"<class 'gluon.dal.objects.Field'>"
+p324
+sS'IS_LIST_OF_EMAILS'
+p325
+S"<class 'gluon.validators.IS_LIST_OF_EMAILS'>"
+p326
+sS'DIV'
+p327
+S"<class 'gluon.html.DIV'>"
+p328
+sS'LEGEND'
+p329
+S"<class 'gluon.html.LEGEND'>"
+p330
+sS'COLGROUP'
+p331
+S"<class 'gluon.html.COLGROUP'>"
+p332
+sS'DAL'
+p333
+S"<class 'gluon.dal.base.DAL'>"
+p334
+sS'ASSIGNJS'
+p335
+S'<function ASSIGNJS>'
+p336
+sS'ouser'
+p337
+S'<Table auth_user (id,first_name,last_name,userna...stration_key,reset_password_key,registration_id)>'
+p338
+sS'TR'
+p339
+S"<class 'gluon.html.TR'>"
+p340
+sS'LI'
+p341
+S"<class 'gluon.html.LI'>"
+p342
+sS'IFRAME'
+p343
+S"<class 'gluon.html.IFRAME'>"
+p344
+sS'TD'
+p345
+S"<class 'gluon.html.TD'>"
+p346
+sS'IS_URL'
+p347
+S"<class 'gluon.validators.IS_URL'>"
+p348
+sS'A'
+S"<class 'gluon.html.A'>"
+p349
+sS'STYLE'
+p350
+S"<class 'gluon.html.STYLE'>"
+p351
+sS'IS_DATETIME_IN_RANGE'
+p352
+S"<class 'gluon.validators.IS_DATETIME_IN_RANGE'>"
+p353
+sS'IS_IMAGE'
+p354
+S"<class 'gluon.validators.IS_IMAGE'>"
+p355
+sS'I'
+S"<class 'gluon.html.I'>"
+p356
+sS'IS_NOT_IN_DB'
+p357
+S"<class 'gluon.validators.IS_NOT_IN_DB'>"
+p358
+sg124
+S"<Storage {'body': <cStringIO.StringO object at 0... 0x7fcc2c480f50>, 'view': 'appadmin/hooks.html'}>"
+p359
+sS'THEAD'
+p360
+S"<class 'gluon.html.THEAD'>"
+p361
+sS'ANY_OF'
+p362
+S"<class 'gluon.validators.ANY_OF'>"
+p363
+sS'IS_NULL_OR'
+p364
+S"<class 'gluon.validators.IS_EMPTY_OR'>"
+p365
+sg56
+S"<Storage {'_vars': None, 'function': 'hooks', 'c...dant/Desktop/web2py/applications/garden_2_may/'}>"
+p366
+sS'IS_EXPR'
+p367
+S"<class 'gluon.validators.IS_EXPR'>"
+p368
+sS'IS_IN_SET'
+p369
+S"<class 'gluon.validators.IS_IN_SET'>"
+p370
+sS'resset'
+p371
+S"<Storage {'verify_email_onaccept': [], 'register...sername_next': '/garden_2_may/restaurant/index'}>"
+p372
+sS'IS_UPLOAD_FILENAME'
+p373
+S"<class 'gluon.validators.IS_UPLOAD_FILENAME'>"
+p374
+sS'IS_DECIMAL_IN_RANGE'
+p375
+S"<class 'gluon.validators.IS_DECIMAL_IN_RANGE'>"
+p376
+sS'TT'
+p377
+S"<class 'gluon.html.TT'>"
+p378
+sS'T'
+S'<gluon.languages.translator object>'
+p379
+sssS'traceback'
+p380
+S'Traceback (most recent call last):\n  File "/home/vedant/Desktop/web2py/gluon/restricted.py", line 224, in restricted\n    exec ccode in environment\n  File "/home/vedant/Desktop/web2py/applications/garden_2_may/models/restaurant.py", line 35, in <module>\n    Field(\'sub_category\',\'reference sub_category\',requires=db.sub_category[response.vars.sub_category].category==response.vars.category),\nAttributeError: \'NoneType\' object has no attribute \'sub_category\'\n'
+p381
+s.

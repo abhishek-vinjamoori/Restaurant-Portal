@@ -1,0 +1,21 @@
+(dp1
+S'output'
+p2
+S"<type 'exceptions.NameError'> global name 'd' is not defined"
+p3
+sS'layer'
+p4
+S'/home/vedant/Desktop/web2py/applications/garden_2_may/controllers/order.py'
+p5
+sS'code'
+p6
+S"# -*- coding: utf-8 -*-\nif resauth.user:\n    try :\n        resauth.user.name\n        session.flash='Please logout of \\'Restaurant\\' to continue'\n        redirect(URL('restaurant','index'))\n    except AttributeError:\n        pass\n\ndef index():\n    redirect(URL('homepage'))\n\ndef homepage():\n    searchform=SQLFORM.factory(Field('name','reference city',requires=IS_IN_DB(db,db.city,label='%(name)s',error_message='Please select your city')),submit_button='Go!!!',labels=dict(name='Select your city'))\n    if searchform.process().accepted:\n        redirect(URL('searchfood',args=[searchform.vars.name]))\n    elif searchform.errors:\n        response.flash='Select your city'\n    return dict(searchform=searchform)\n\ndef searchfood():\n    city=request.args[0] or redirect(URL('order','homepage'))\n    rows=db(db.resauth_user.city==city).select(d.resauth_user.ALL)\n    return dict(rows=rows)\n\ndef user():\n    form=userauth()\n    return dict(form=form)\n\nresponse._vars=response._caller(searchfood)\n"
+p7
+sS'snapshot'
+p8
+(dp9
+sS'traceback'
+p10
+S'Traceback (most recent call last):\n  File "/home/vedant/Desktop/web2py/gluon/restricted.py", line 224, in restricted\n    exec ccode in environment\n  File "/home/vedant/Desktop/web2py/applications/garden_2_may/controllers/order.py", line 30, in <module>\n  File "/home/vedant/Desktop/web2py/gluon/globals.py", line 393, in <lambda>\n    self._caller = lambda f: f()\n  File "/home/vedant/Desktop/web2py/applications/garden_2_may/controllers/order.py", line 23, in searchfood\n    rows=db(db.resauth_user.city==city).select(d.resauth_user.ALL)\nNameError: global name \'d\' is not defined\n'
+p11
+s.

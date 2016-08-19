@@ -1,0 +1,5 @@
+In admin.html,adxz: add buttons for user and restaurant
+In admin.html and admn.py(controller) ,awer:use buttons to change values
+In restaurant/view_menu.html,azxpf:add tabular form and show images
+In order/seemenu.html,wlpq:Show restaurant info and items in its menu,then add a link to see item
+In order/seeitem.html,rg3bp:Make page to show the item(image too),add a button to put item in plate

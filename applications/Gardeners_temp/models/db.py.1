@@ -1,0 +1,35 @@
+# -*- coding: utf-8 -*-
+db=DAL('sqlite://storage.sqlite')
+country_list=('India')
+COUNTRIES=set(country_list)
+from gluon.tools import Auth
+userauth=Auth(db)
+"""class IS_PHONE():
+    def __init___(this,length=10,error_message='Not a valid phone number'):
+        this.l=length
+        this.e=error_message
+    def __call__(this,value):
+        if value.isdigit() and value.length==10:
+            return (value,None)
+        else:
+            return (value,this.e)
+    def formatter(self,value):
+        return value"""
+db.define_table('gender',Field('type'),format='%(type)s')
+db.define_table(
+    userauth.settings.table_user_name,
+    Field('first_name', length=128, default='',requires=IS_NOT_EMPTY(error_message=userauth.messages.is_empty)),
+    Field('last_name', length=128, default='',requires=IS_NOT_EMPTY(error_message=userauth.messages.is_empty)),
+    Field('gender',db.gender),
+    Field('email', length=128, default='', unique=True),
+    Field('phone_number',length=10,default='',requires=IS_MATCH('^[0-9]{10}$',error_message='Must be a valid phone number')),
+    Field('password', 'password', length=512, readable=False, label='Password'),
+    Field('registration_key', length=512, writable=False, readable=False, default=''),
+    Field('reset_password_key', length=512, writable=False, readable=False, default=''),
+    Field('registration_id', length=512, writable=False, readable=False, default=''),
+    format='%(first_name)s %(last_name)s')
+
+ouser = db[userauth.settings.table_user_name]
+ouser.password.requires = [IS_STRONG(min=6, special=0, upper=0,number=0,lower=0),CRYPT()]
+ouser.email.requires = [IS_EMAIL(error_message=userauth.messages.invalid_email),IS_NOT_IN_DB(db, 'userauth_user.email')]
+userauth.define_tables(username=True)

@@ -1,0 +1,21 @@
+(dp1
+S'output'
+p2
+S"<type 'exceptions.NameError'> global name 'iteminfo' is not defined"
+p3
+sS'layer'
+p4
+S'/home/vedant/Desktop/web2py/applications/garden_2_may/controllers/order.py'
+p5
+sS'code'
+p6
+S"# -*- coding: utf-8 -*-\nif resauth.user:\n    try :\n        resauth.user.name\n        session.flash='Please logout of \\'Restaurant\\' to continue'\n        redirect(URL('restaurant','index'))\n    except AttributeError:\n        pass\n\nif not session.gardenvars:\n    session.gardenvars={}\n\ntry:\n    type(userplate)\nexcept NameError:\n    userplate=Plate()\nsession.platecount=len(userplate.contents)\n\nresponse.menu+=[['Homepage',False,URL('order','homepage')],['Help',False,None,[[['Item1'],False,None],['Item2',False,None]]]]\n\nif userauth.user:\n    response.menu=response.menu[:1]+[['My Previous Orders',False,None],['Account',False,None]]+response.menu[1:]\n\ndef index():\n    redirect(URL('homepage'))\n\ndef homepage():\n    response.title='Garden'\n    response.subtitle='...'\n    searchform=SQLFORM.factory(Field('name','reference city',requires=IS_IN_DB(db,db.city,label='%(name)s',error_message='Please select your city')),submit_button='Go!!!',labels=dict(name='Select your city'))\n    if searchform.process().accepted:\n        session.gardenvars['searchcity']=searchform.vars.name\n        redirect(URL('searchfood'))\n    elif searchform.errors:\n        response.flash='Select your city'\n    return dict(searchform=searchform)\n\ndef searchfood():\n    if 'searchcity' not in session.gardenvars.keys():\n        redirect(URL('homepage'))\n    cityid=session.gardenvars['searchcity']\n    #del session.gardenvars['searchcity']\n    rows=db(db.resauth_user.id==cityid).select(db.resauth_user.ALL)\n    return dict(rows=rows)\n\ndef user():\n    form=userauth()\n    return dict(form=form)\n\ndef seemenu():\n    if not request.args:\n        redirect(URL('searchfood'))\n    resinfo=db(db.resauth_user.id==request.args(0)).select(db.resauth_user.ALL)\n    if not len(resinfo)==1:\n        session.flash='Error'\n        redirect(URL('searchfood'))\n    resinfo=resinfo.first()\n    menuitems=db(db.dish.provider==request.args(0)).select(db.dish.ALL)\n    return dict(resinfo=resinfo,menuitems=menuitems)\n\ndef seeitem():\n    if not request.args:\n        redirect(URL('order','searchfood'))\n    #iteminfo=db(db.dish.id==request.args(0)).select(db.dish.ALL)\n    if not len(iteminfo)==1:\n        session.flash='Error occoured'\n        redirect(URL('order','searchfood'))\n    #iteminfo=iteminfo.first()\n    return dict(iteminfo=12)\n\nresponse._vars=response._caller(seeitem)\n"
+p7
+sS'snapshot'
+p8
+(dp9
+sS'traceback'
+p10
+S'Traceback (most recent call last):\n  File "/home/vedant/Desktop/web2py/gluon/restricted.py", line 224, in restricted\n    exec ccode in environment\n  File "/home/vedant/Desktop/web2py/applications/garden_2_may/controllers/order.py", line 71, in <module>\n  File "/home/vedant/Desktop/web2py/gluon/globals.py", line 393, in <lambda>\n    self._caller = lambda f: f()\n  File "/home/vedant/Desktop/web2py/applications/garden_2_may/controllers/order.py", line 65, in seeitem\n    if not len(iteminfo)==1:\nNameError: global name \'iteminfo\' is not defined\n'
+p11
+s.

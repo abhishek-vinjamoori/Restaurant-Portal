@@ -1,0 +1,15 @@
+{{extend 'reslayout.html'}}
+<h1>Under construction</h1>
+{{if not resauth.user:}}
+<h3>
+    Why choose  ? </h3>
+    <p>
+        We have atleast thousands of customers visiting our website daily and this number has been ever increasing.
+    </p>
+    <p>
+        We take care of both secure orders and also easy to add/modify your menus.
+    </p>
+<h4>
+    Regular User? {{=A("Click Here",_href=URL('order','homepage'))}}
+</h4>
+{{pass}}

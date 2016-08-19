@@ -1,0 +1,31 @@
+{{extend 'layout.html'}}
+<h1>Admin</h1>
+{{if request.function=='index':}}
+<h2>
+    Welcome to admin interface
+</h2>
+<h3>
+    Please select the database to modify
+</h3>
+    {{#adxz}}
+{{elif request.function=='muser':}}
+<h2>muser<h2/>
+{{elif request.function=='mres':}}
+    {{='button'}}
+    {{#awer}}
+    {{=BUTTON('hi',_onclick=redirect(URL('muser')))}}
+    {{if button==0:}}
+        {{='button is 0'}}
+    {{elif button==1:}}
+        {{='button is 1'}}
+    {{pass}}
+{{elif request.function=='moth':}}
+    <h3>
+        Add a city
+    </h3>
+    {{=addform}}
+    <h3>
+        Delete a city
+    </h3>
+    {{=delform}}
+{{pass}}

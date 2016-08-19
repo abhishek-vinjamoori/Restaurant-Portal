@@ -1,0 +1,14 @@
+{{extend 'orderlayout.html'}}
+<h2>
+    Restaurants near you
+</h2>
+{{if len(rows)==0:}}
+<h3>
+    Sorry!!Cannot find restaurants in your location
+</h3>
+{{pass}}
+<ul>
+    {{for row in rows:}}
+    <li>{{=BEAUTIFY(dict(name=row.name,address=row.address,email=row.email,phone_number=row.contact_number_1,seemenu=A('See Menu',_href=URL('order','seemenu',args=[row.id]))))}}</li>
+    {{pass}}
+</ul>

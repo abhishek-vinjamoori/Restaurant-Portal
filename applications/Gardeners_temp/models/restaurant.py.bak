@@ -1,0 +1,43 @@
+# -*- coding: utf-8 -*-
+resauth=Auth(db,controller='restaurant')
+resset=resauth.settings
+resset.table_user_name='resauth_user'
+resset.table_group_name='resauth_group'
+resset.table_membership_name='resauth_membership'
+resset.table_permission_name='resauth_permission'
+resset.table_event_name='resauth_event'
+resset.table_cas_name='resauth_cas'
+db.define_table(
+    resauth.settings.table_user_name,
+    Field('name',length=128,default='',requires=IS_NOT_EMPTY(error_message=resauth.messages.is_empty)),
+    Field('email',length=128,default='',unique=True),
+    Field('contact_number_1',length=128,default='',requires=IS_MATCH('^[0-9]{8,16}$',error_message='Must be a valid phone number')),
+    Field('contact_number_2',length=128,default='',requires=IS_EMPTY_OR(IS_MATCH('^[0-9]{8,16}$',error_message='Must be either empty or a valid phone number'))),
+    Field('city','reference city',requires=IS_IN_DB(db,db.city,label='%(name)s',error_message='Please select your city')),
+    Field('address',length='1024',requires=IS_NOT_EMPTY(error_message='Must specify an address')),
+    Field('Photo','upload',requires=IS_EMPTY_OR(IS_IMAGE(error_message='Must upload only images'))),
+    Field('password','password',length=512,readable=False,label='Password'),
+    Field('registration_key',length=512,writable=False,readable=False,default=''),
+    Field('reset_password_key',length=512,writable=False,readable=False,default=''),
+    Field('registration_id',length=512,writable=False,readable=False,default=''),
+    format='%(name)s')
+
+ruser=db[resauth.settings.table_user_name]
+ruser.password.requires=[IS_STRONG(min=8,special=0.0,upper=1,number=1,lower=1),CRYPT()]
+ruser.email.requires=[IS_EMAIL(error_message=resauth.messages.invalid_email),IS_NOT_IN_DB(db,ruser.email,error_message="E-mail address already in use")]
+resauth.define_tables(username=False)
+
+db.define_table(
+    'dish',
+    Field('name',length=128,requires=IS_NOT_EMPTY(error_message='Name cannot be empty')),
+    Field('price',length=128,requires=IS_INT_IN_RANGE(17,None)),
+    Field('description',length=256),
+    Field('category','reference category',requires=IS_IN_DB(db,db.category,label='%(name)s',error_message='Please select a category')),
+    Field('image','upload',requires=IS_EMPTY_OR(IS_IMAGE(error_message='Uploaded file must be an image')),autodelete=True),
+    Field('provider','reference resauth_user',writable=False,readable=False,default=resauth.user_id))
+
+db.define_table('orders',
+                Field('item_id','reference dish',readable=False,writable=False),
+                Field('buyer','reference auth_user',readable=False,writable=False),
+                Field('quantity',writable=False,requires=IS_INT_IN_RANGE(1,20)),
+                Field('time','datetime',default=request.now))

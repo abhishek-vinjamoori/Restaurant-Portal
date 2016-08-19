@@ -1,0 +1,14 @@
+{{extend 'orderlayout.html'}}
+{{#wlpq}}
+{{=B(resinfo.name)}}
+{{if len(menuitems)==0:}}
+<h3>
+    {{=resinfo.name}}'s menu is empty
+</h3>
+{{else:}}
+<ol>
+{{for row in menuitems:}}
+    <li>{{=row.name}},{{=row.price}},{{=A('See',_href=URL('order','seeitem',args=[row.id]))}}</li>
+{{pass}}
+</ol>
+{{pass}}

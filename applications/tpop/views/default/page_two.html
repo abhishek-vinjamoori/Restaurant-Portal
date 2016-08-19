@@ -1,0 +1,12 @@
+{{ extend 'layout.html'}}
+<html>
+    <head>Namaste duniya</head>
+    <title>Final countdown</title>
+    <body>
+        <h1>Hello....{{=mess}}</h1>
+        <p>You entered the following queries:-</p><br>
+        <p style="color:red">Your first name is {{=request.vars.fname}}<p>
+        <p>Your last name is {{=request.vars.lname}}</p>
+        {{=A(T('Go the third page-->'),_href=URL('page_three'))}}
+    </body>
+</html>

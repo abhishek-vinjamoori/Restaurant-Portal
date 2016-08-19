@@ -1,0 +1,13 @@
+{{extend 'orderlayout.html'}}
+{{if itemlist==[]:}}
+<h4>
+    Your Plate is empty!
+</h4>
+{{=A('Back to Homepage',_href=URL('order','homepage'))}}
+{{else:}}
+{{=BEAUTIFY(itemlist)}}
+<h3>
+    Total Cost: {{=totalcost}}
+</h3>
+{{=form}}
+{{pass}}

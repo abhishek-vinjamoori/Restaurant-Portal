@@ -1,0 +1,20 @@
+{{extend 'reslayout.html'}}
+<table border="2px">
+    <tr>
+    <th colspan=2>Item</th>
+    <th>Price</th>
+    <th>Category</th>
+    <th>Description</th>
+    </tr>
+    {{for row in rows:}}
+    <tr>
+    <td colspan="2">{{=row.name}}
+        {{if row.image:}}<img width="50px" src="{{=URL('download_img',args=row.image)}}" />
+        {{pass}}
+        </td>
+    <td>{{=row.price}}</td>
+    <td>{{=db.category[row.category].name}}</td>
+    <td>{{=row.description}}</td>
+    </tr>
+        {{pass}}
+</table>

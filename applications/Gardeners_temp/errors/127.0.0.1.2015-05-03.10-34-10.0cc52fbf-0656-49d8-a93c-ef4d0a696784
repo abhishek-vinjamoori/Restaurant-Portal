@@ -1,0 +1,21 @@
+(dp1
+S'output'
+p2
+S"<type 'exceptions.AttributeError'> 'Table' object has no attribute 'format'"
+p3
+sS'layer'
+p4
+S'/home/vedant/Desktop/web2py/applications/garden_2_may/controllers/restaurant.py'
+p5
+sS'code'
+p6
+S"# -*- coding: utf-8 -*-\nresponse.menu.append(['Homepage',False,URL('restaurant','index')])\nresponse.menu+=[['Manage Orders',False,URL('restaurant','manage_orders')],['Change Menu',False,URL('manage_menu')]]\n\ndef index():\n    return dict(mesg=userauth.is_logged_in(),m2=resauth.user_id)\n\ndef user():\n    return dict(form=resauth())\n\n@resauth.requires_login()\ndef manage_menu():\n    response.title='Manage your menu'\n    addform=SQLFORM.factory(Field('name',length=128,requires=IS_NOT_EMPTY(error_message='Name cannot be empty')),\n                            Field('price',length=128,requires=IS_INT_IN_RANGE(17,None)),\n                            Field('description',length=256),\n                            Field('category','reference category',requires=IS_IN_DB(db,db.category.format)),\n                            Field('sub_category','reference sub_category'),\n                            Field('Image','upload',requires=IS_EMPTY_OR(IS_IMAGE(error_message='Uploaded file must be an\\\n                            image')),autodelete=True),\n                            Field('provider','reference\\\n                            resauth_user',writable=False,readable=False,default=resauth.user_id))\n    if addform.process().accepted:\n        response.flash='%s has been added to the menu' %(addform.vars.name)\n    elif addform.errors:\n        response.flash='Please correct the errors and try again'\n    return dict(addform=addform)\n\n@resauth.requires_login()\ndef manage_orders():\n    q=db.dish.provider==resauth.user_id\n    q&=db.dish.id==db.orders.item_id\n    rows=db(q).select(db.orders.ALL,db.dish.ALL)\n    return dict(rows=rows)\n\nresponse._vars=response._caller(manage_menu)\n"
+p7
+sS'snapshot'
+p8
+(dp9
+sS'traceback'
+p10
+S'Traceback (most recent call last):\n  File "/home/vedant/Desktop/web2py/gluon/restricted.py", line 224, in restricted\n    exec ccode in environment\n  File "/home/vedant/Desktop/web2py/applications/garden_2_may/controllers/restaurant.py", line 36, in <module>\n  File "/home/vedant/Desktop/web2py/gluon/globals.py", line 393, in <lambda>\n    self._caller = lambda f: f()\n  File "/home/vedant/Desktop/web2py/gluon/tools.py", line 3444, in f\n    return action(*a, **b)\n  File "/home/vedant/Desktop/web2py/applications/garden_2_may/controllers/restaurant.py", line 17, in manage_menu\n    Field(\'category\',\'reference category\',requires=IS_IN_DB(db,db.category.format)),\n  File "/home/vedant/Desktop/web2py/gluon/dal/objects.py", line 516, in __getitem__\n    return ogetattr(self, str(key))\nAttributeError: \'Table\' object has no attribute \'format\'\n'
+p11
+s.
